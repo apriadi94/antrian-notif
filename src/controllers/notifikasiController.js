@@ -1,6 +1,9 @@
+const antrianService = require('../services/antrianService')
 
-exports.getNotifikasi = (req, res) => {
+exports.getNotifikasi = async (req, res) => {
+    const listAntrian = await antrianService.get().catch(err => logger.error(err))
+
     res.json({
-        data : 'tes'
+        data : listAntrian
     })
 }
