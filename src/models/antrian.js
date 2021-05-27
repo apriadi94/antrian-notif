@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         type : DataTypes.INTEGER,
         field: 'nomor',
     },
-    MejaNama: {
+    mejaNama: {
         type : DataTypes.STRING,
         field: 'meja_nama',
     }
