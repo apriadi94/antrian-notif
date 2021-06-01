@@ -3,7 +3,7 @@ const moment = require('moment')
 
 exports.get = () => {
     return new Promise((resolve, reject) => {
-        Models.DataAntrian.findAll({
+        Models.Notif.findAll({
             where : {
                 tanggal : moment().format('YYYY-MM-DD')
             }
@@ -15,9 +15,27 @@ exports.get = () => {
     })
 }
 
+exports.insert = (body) => {
+    return new Promise(async (resolve, reject) => {
+
+        const lastRecord = await this.getLastRecord()
+        if(lastRecord){
+            body.nomor = lastRecord.nomor + 1
+        }else{
+            body.nomor = 1
+        }
+        
+        Models.Notif.create(body).then(res => {
+            resolve(res)
+        }).catch(err => {
+            reject(err)
+        })
+    })
+}
+
 exports.getLastRecord = () => {
     return new Promise((resolve, reject) => {
-        Models.DataAntrian.findOne({
+        Models.Notif.findOne({
             where : {
                 tanggal : moment().format('YYYY-MM-DD')
             },
